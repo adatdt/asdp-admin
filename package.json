@@ -29,15 +29,8 @@
     "tailwindcss": "^4",
     "typescript": "^5"
   },
-  "compilerOptions": {
-    "baseUrl": "src/",
-    "paths": {
-      "@/styles/*": [
-        "styles/*"
-      ],
-      "@/components/*": [
-        "components/*"
-      ]
-    }
-  }
+  "description": "asdp",
+  "main": "index.js",
+  "author": "",
+  "license": "ISC"
 }
