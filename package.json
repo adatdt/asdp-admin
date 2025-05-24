@@ -10,6 +10,7 @@
     "postinstall": "flowbite-react patch"
   },
   "dependencies": {
+    "@tanstack/react-table": "^8.21.3",
     "datatables.net-dt": "^2.3.1",
     "datatables.net-react": "^1.0.1",
     "flowbite-react": "^0.11.7",
