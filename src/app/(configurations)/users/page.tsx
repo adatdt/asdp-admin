@@ -1,6 +1,7 @@
 "use client";
 import { Button, Modal, ModalBody, ModalFooter, ModalHeader,Label,TextInput,Dropdown,DropdownItem } from "flowbite-react";
 import { useState, useReducer  } from "react";
+import {GridCols,GetModal, InputSearchLabel} from '../../components/mycomponent'
 
 import {
     createColumnHelper,
@@ -82,6 +83,7 @@ import {
 export default  function Page() {
 //   const posts = await getPosts()
 const [openModal, setOpenModal] = useState(false);
+const [dataModal, setDataModal] = useState({});
 const [searchData, setSearchData] = useState(false);
 
 
@@ -94,15 +96,12 @@ const [data, _setData] = useState(() => [...defaultData])
     getCoreRowModel: getCoreRowModel(),
   })
 
- 
-  return (
-    <> 
-    <div className="w-full  text-righ">
-    <Button onClick={() => setOpenModal(true)} className="float-right">Toggle modal</Button>
-    </div>
-      <Modal show={openModal} onClose={() => setOpenModal(false)}>
-        <ModalHeader>Terms of Service</ModalHeader>
-        <ModalBody>
+  const myModal = () =>{
+    setOpenModal(!openModal)
+
+  }
+
+  const contentModal = (
           <div className="space-y-6">
             <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
               With less than a month to go before the European Union enacts new consumer privacy laws for its citizens,
@@ -114,25 +113,21 @@ const [data, _setData] = useState(() => [...defaultData])
               soon as possible of high-risk data breaches that could personally affect them.
             </p>
           </div>
-        </ModalBody>
-        <ModalFooter>
-          <Button onClick={() => setOpenModal(false)}>I accept</Button>
-          <Button color="gray" onClick={() => setOpenModal(false)}>
-            Decline
-          </Button>
-        </ModalFooter>
-      </Modal>
+     );
+  
 
-      <div className="grid gap-6 mb-6 md:grid-cols-4">
-        <div>
-            <div className="flex">
-                <span id="dropdown-button" data-dropdown-toggle="dropdown" className="shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-s-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600">Pelabuhan </span>
-                <div className="relative w-full">
-                <input type="search" id="search-dropdown" className="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-e-lg border-s-gray-50 border-s-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-s-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500" placeholder="Pelabuhan" required />
-                </div>
-            </div>
-        </div>
+   const titleModal = "Term of condition"
 
+  return (
+    <> 
+    <div className="w-full  text-righ">
+    <Button onClick={myModal} className="float-right">Toggle modal</Button>
+      <GetModal data={{isOpen:openModal,content:contentModal, title:titleModal}} myModal={myModal} />
+    </div>
+
+      <GridCols data={{"col":3}} >
+        <InputSearchLabel data={{"label":"Pelabuhan","name":"port" }} />
+        <InputSearchLabel data={{"label":"Layanan","name":"service" }} />
         <div>
             <form className="max-w-lg mx-auto">
                 <div className="flex">
@@ -141,7 +136,7 @@ const [data, _setData] = useState(() => [...defaultData])
                             <button onClick={() => setSearchData(!searchData)}  type="button" className="shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-s-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600" type="button" id="menu-button" aria-expanded="true" aria-haspopup="true">
                             Options
                             <svg className="-mr-1 size-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
-                            <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
+                            <path fillRule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
                             </svg>
                             </button>
                         </div>
@@ -167,7 +162,7 @@ const [data, _setData] = useState(() => [...defaultData])
                 </div>
             </form>
         </div>
-    </div>
+      </GridCols>
 
     <div className="w-full justify-between sm:flex sm:items-center sm:justify-between">
 
