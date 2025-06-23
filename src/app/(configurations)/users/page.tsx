@@ -37,7 +37,8 @@ const title = 'User';
     );
 
     const titleModal = "Term of condition"
-
+    const filterPelabuhan ={label:"Pelabuhan",name:"port"}
+    const filterService ={label:"Layanan",name:"service"}
   return (
     <> 
 
@@ -54,8 +55,9 @@ const title = 'User';
                 <div className="p-5 border border-b-0 border-gray-200 dark:border-gray-700 dark:bg-gray-900">
 
                     <GridCols col={"3"} >
-                        <InputSearchLabel data={{"label":"Pelabuhan","name":"port" }} />
-                        <InputSearchLabel data={{"label":"Layanan","name":"service" }} />
+                        <InputSearchLabel {...filterPelabuhan} />
+                        <InputSearchLabel {...filterService} />
+
                         <InputSearchOption data={{"searchOptionData":searchOptionData }} searchOption={searchOption} />
                     </GridCols>
                     <div className="w-full justify-between sm:flex sm:items-center sm:justify-between">

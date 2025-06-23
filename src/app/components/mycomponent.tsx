@@ -10,8 +10,9 @@ export const  GridCols = (props: any) =>{
   );
 }
 
-export const  InputSearchLabel = (props:any) =>{
-    const data = props.data
+export const  InputSearchLabel = (props:{label: string; name:string;}) =>{
+    // console.log(props.data.label);
+    const data = props
   return (
 
     <div>
