@@ -16,6 +16,7 @@ const title = 'User';
 
     const myModal = () =>{
         setOpenModal(!openModal)
+        return true
     }
 
     const searchOption = () =>{
