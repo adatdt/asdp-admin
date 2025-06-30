@@ -3,9 +3,11 @@ import { useState  } from "react";
 import {
   GetModal, 
   BtnAdd,
-  FlexFilteting
+  FlexFilteting,
+  FlexFiltetingDropdown
 } from '../../components/mycomponent'
 
+import { MyTable } from "./tables"
 
 export default  function Page() {
 //   const posts = await getPosts()
@@ -56,8 +58,8 @@ const title = 'User';
                         <FlexFilteting name="Pelabuhan"></FlexFilteting>
                         <FlexFilteting name="Dermaga"></FlexFilteting>
 
-
-                        <div className="flex">
+                        <FlexFiltetingDropdown searchOption={searchOption} searchOptionData={searchOptionData} ></FlexFiltetingDropdown>
+                        {/* <div className="flex">
                             <div className="relative inline-block text-left">
                                 <div>
                                     <button onClick={searchOption}  type="button" className="shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-s-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600"   id="menu-button" aria-expanded="true" aria-haspopup="true">
@@ -86,11 +88,11 @@ const title = 'User';
                             <span className="sr-only">Search</span>
                             </button>
                             </div>
-                        </div>
+                        </div> */}
 
                     </div>                              
                     <div className="w-full justify-between sm:flex sm:items-center sm:justify-between">
-                        Table
+                            <MyTable />
                     </div>
                 </div>
             </div>
