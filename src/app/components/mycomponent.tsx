@@ -31,13 +31,40 @@ export const  GetModal : React.FC<ModalProps> = ({myModal, title, content, getOp
 
 interface BtnAddProps {
     onClick: () => void;
-    position: string;
+    position?: string;
   }
 export const BtnAdd : React.FC<BtnAddProps> = ({onClick,position }) =>{
     return(
         <button onClick={onClick} type="button" className={" focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg px-3 py-2 text-xs me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 "+position}>+ Tambah</button>
     )
 }
+
+interface BtnSaveProps {
+    onClick: () => void;
+    position?: string;
+  }
+export const BtnSave : React.FC<BtnSaveProps> = ({onClick,position }) =>{
+    return(
+        <button onClick={onClick} type="button" className={" focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg px-3 py-2 text-xs me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 "+position}>Save</button>
+    )
+}
+
+
+interface TextInputProps {
+    name: string;
+    id: string|undefined;
+    typeText:string;
+    placeHolder:string;
+  }
+export const TextInput : React.FC<TextInputProps> = ({name,id,typeText, placeHolder}) =>{
+    return(
+        <div className="relative z-0 w-full mb-5 group">
+        <input type={typeText} name={name} id={id} className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+        <label htmlFor={id} className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">{placeHolder}</label>
+    </div>
+    )
+}
+
 
 interface FlexFiltetingProps {
     name: string;
@@ -54,22 +81,25 @@ export const FlexFilteting : React.FC<FlexFiltetingProps> = ({name }) =>{
     )
 }
 
-
-interface FlexFiltetingDropdownProps {
-    searchOption: () => void;
-    searchOptionData:boolean;
+interface MyDataListProps {
+    data:{name: string; id:number;}[];
+    defaultVal:boolean;
   }
-  
-  export const FlexFiltetingDropdown : React.FC<FlexFiltetingDropdownProps> = ({searchOption, searchOptionData }) =>{
-    const lists = [
-          {name:"Account settings", id:1},
-          {name:"Support", id:2},
-          {name:"License", id:3},
-    ]
+
+  export const FlexFiltetingDropdown  = (dataLists:MyDataListProps) =>{
+
+    const defaultData = dataLists.defaultVal
+    const lists = dataLists.data
+
+    const [searchOptionData, setSearchOptionData] = useState(defaultData);
+    const searchOption = () =>{
+        setSearchOptionData(!searchOptionData)
+    }
   
     const[valList, setValList] = useState(lists[0].name)
     const getName = (val:string) =>{
       setValList(val)
+      setSearchOptionData(!searchOptionData)
       return val
     }
     return(
@@ -89,8 +119,8 @@ interface FlexFiltetingDropdownProps {
             {searchOptionData&&(
             <div className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-hidden" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabIndex={-1}>
                 <div className="py-1" role="none">
-                    {lists.map(list=>(
-                        <a href="#" key={list.id} onClick={()=>getName(list.name)} className="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabIndex={-1} id={`menu-item-${list.id}`}>{list.name}</a>    
+                    {lists.map((list, index) =>(
+                        <a href="#" key={index} onClick={()=>getName(list.name)} className="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabIndex={-1} id={`menu-item-${list.id}`}>{list.name}</a>    
                     ))}
 
                 </div>

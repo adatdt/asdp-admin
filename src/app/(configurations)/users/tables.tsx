@@ -1,13 +1,26 @@
 "use client";
 import { useState  } from "react";
 
-export const MyTable = () => {
+interface MyDataProps {
+    // data:{full_name: string; id:number; address:string;  status:number; phone_number?:string; username:string; }[];
+    data:(string|number)[][];
+    params:{
+        filterData:number[];
+        dataHeader:string[];    
+        startData:number;
+        showData:number;
+        totalData:number;                  
+        }
+  }
+
+export const MyTable = (data:MyDataProps) => {
+    // console.log(data.setField[0])
     const [openSelectTable, setOpenSelectTable] = useState(false);
     const openFiterSelectTable = () =>{
         setOpenSelectTable(!openSelectTable)
     }
 
-    const radioFilters =[10,25,50,100]
+    const radioFilters =data.params.filterData
     const [selectedVal, setSelectedVal] = useState(radioFilters[0]);
     const chanceSelect = (val: number): number =>{
         setSelectedVal(val);
@@ -15,84 +28,7 @@ export const MyTable = () => {
         return val
     }
 
-
-    const dataBodies = [{
-        name:"budi",
-        alamat:"bekasi",
-        skill: "program ",
-        hoby:"gambar",
-        education:" bechelor deagree",
-        majoring:" system information",
-        action:" edit delete"
-    },
-    {
-        name:"budi 2",
-        alamat:"bekasi 2",
-        skill: "program  2",
-        hoby:"gambar 2",
-        education:" bechelor deagree 2",
-        majoring:" system information 2",
-        action:" edit delete"
-    },
-
-    {
-        name:"budi 3",
-        alamat:"bekasi 3",
-        skill: "program  3",
-        hoby:"gambar 3",
-        education:" bechelor deagree 3",
-        majoring:" system information 3",
-        action:" edit delete"
-    },
-    {
-        name:"budi 4",
-        alamat:"bekasi 4",
-        skill: "program  4",
-        hoby:"gambar 4",
-        education:" bechelor deagree 4",
-        majoring:" system information 4",
-        action:" edit delete"
-    },
-    {
-        name:"budi 5",
-        alamat:"bekasi 5",
-        skill: "program  5",
-        hoby:"gambar 5",
-        education:" bechelor deagree 5",
-        majoring:" system information 5",
-        action:" edit delete"
-    },    
-    {
-        name:"budi 6",
-        alamat:"bekasi 6",
-        skill: "program  6",
-        hoby:"gambar 6",
-        education:" bechelor deagree 6",
-        majoring:" system information 6",
-        action:" edit delete"
-    },
-    {
-        name:"budi 7",
-        alamat:"bekasi 7",
-        skill: "program  7",
-        hoby:"gambar 7",
-        education:" bechelor deagree 7",
-        majoring:" system information 7",
-        action:" edit delete"
-    },
-    {
-        name:"budi 8",
-        alamat:"bekasi 8",
-        skill: "program  8",
-        hoby:"gambar 8",
-        education:" bechelor deagree 8",
-        majoring:" system information 8",
-        action:" edit delete"
-    },
-    
-]
-
-const dataHeaders = ["name","alamat","skill","hoby","education","majoring","action"];
+   const dataHeaders = data.params.dataHeader
 
     return(
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg w-full">
@@ -147,30 +83,14 @@ const dataHeaders = ["name","alamat","skill","hoby","education","majoring","acti
             </thead>
             <tbody>
 
-                {dataBodies.map((dataBody, index) =>(
-                <tr key={index} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600">
+                {data.data.map((dataBody, index) =>(
+                    <tr key={index} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600">
+                    {dataBody.map((val, idx) => (
 
-                    <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                        {dataBody.name}
+                    <th key={idx}scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        {val}
                     </th>
-                    <td className="px-6 py-4">
-                    {dataBody.alamat}
-                    </td>
-                    <td className="px-6 py-4">
-                    {dataBody.skill}
-                    </td>
-                    <td className="px-6 py-4">
-                    {dataBody.hoby}
-                    </td>
-                    <td className="px-6 py-4">
-                    {dataBody.education}
-                    </td>
-                    <td className="px-6 py-4">
-                    {dataBody.majoring}
-                    </td>
-                    <td className="px-6 py-4">
-                    {dataBody.action}
-                    </td>
+                    ))}                
                 </tr>
 
                 ))}
@@ -181,7 +101,7 @@ const dataHeaders = ["name","alamat","skill","hoby","education","majoring","acti
         <div className="flex flex-column sm:flex-row flex-wrap space-y-4 sm:space-y-0 items-center justify-between pb-4 pt-2">
             <div>
                 <span className="text-sm text-gray-700 dark:text-gray-400">
-                    Showing <span className="font-semibold text-gray-900 dark:text-white">1</span> to <span className="font-semibold text-gray-900 dark:text-white">10</span> of <span className="font-semibold text-gray-900 dark:text-white">100</span> Entries
+                    Showing <span className="font-semibold text-gray-900 dark:text-white">{data.params.startData}</span> to <span className="font-semibold text-gray-900 dark:text-white">{data.params.showData}</span> of <span className="font-semibold text-gray-900 dark:text-white">{data.params.totalData}</span> Entries
                 </span>
             
             </div>
