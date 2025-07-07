@@ -32,7 +32,7 @@ export const  GetModalAdd : React.FC<ModalProps> = ({myModal, title,  getOpen,ge
                 username:getUsername,
                 password:getPassword}
             try {
-              const response = await fetch('api/configurations/users/add', {
+              const response = await fetch('api/configurations/users', {
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json',

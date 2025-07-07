@@ -12,6 +12,7 @@
   "dependencies": {
     "@tanstack/react-table": "^8.21.3",
     "axios": "^1.10.0",
+    "bcrypt": "^6.0.0",
     "datatables.net-dt": "^2.3.1",
     "datatables.net-react": "^1.0.1",
     "flowbite-react": "^0.11.7",
@@ -25,6 +26,7 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
+    "@types/bcrypt": "^5.0.2",
     "@types/node": "^20.19.4",
     "@types/pg": "^8.15.4",
     "@types/react": "^19",
