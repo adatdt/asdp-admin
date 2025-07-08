@@ -100,15 +100,13 @@ export default  function Page() {
             }
     };
 
-    useEffect(()=>{            
-          getData()
-    },[refresh])
-
     const getRefresh = () =>{
         setRefresh(1)
     }
     
- 
+    useEffect(()=>{            
+          getData()
+    },[refresh])
 
     const myModal = (data:boolean) =>{
         setOpenModal(data)
