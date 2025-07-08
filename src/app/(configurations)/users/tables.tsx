@@ -9,7 +9,8 @@ interface MyDataProps {
         dataHeader:string[];    
         startData:number;
         showData:number;
-        totalData:number;                  
+        totalData:number;
+        getShowing:(data:number)=>void;                  
         }
   }
 
@@ -25,6 +26,11 @@ export const MyTable = (data:MyDataProps) => {
     const chanceSelect = (val: number): number =>{
         setSelectedVal(val);
         setOpenSelectTable(false)
+        data.params.getShowing(val)
+        // console.log(val)
+
+
+        // data.params.getShowing(selectedVal)
         return val
     }
 

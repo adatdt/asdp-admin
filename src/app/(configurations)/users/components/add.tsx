@@ -1,20 +1,18 @@
 "use client";
 import React, { useState } from 'react';
-import { TextInput, BtnSave  } from "../../../components/mycomponent";
-
-// import { useState  } from "react";
-// import parse from 'html-react-parser';
+import { TextInput, BtnSave, GeneralBtn  } from "../../../components/mycomponent";
 
 
-import { Button, Modal, ModalBody, ModalFooter } from "flowbite-react";
+import { Modal, ModalBody, ModalFooter } from "flowbite-react";
 
 interface ModalProps extends React.InputHTMLAttributes<HTMLInputElement>{    
     myModal: (data:boolean) => void;
     title: string;
     getOpen: boolean;
     getToast:(status:boolean)=>void;
+    getRefresh:()=>void;
     }
-export const  GetModalAdd : React.FC<ModalProps> = ({myModal, title,  getOpen,getToast}) =>{
+export const  GetModalAdd : React.FC<ModalProps> = ({myModal, title,  getOpen,getToast, getRefresh}) =>{
 
         const [getName, setName ] = useState<string|number>("");
         const [getPhone, setPhone ] = useState("");
@@ -23,8 +21,7 @@ export const  GetModalAdd : React.FC<ModalProps> = ({myModal, title,  getOpen,ge
         const [getPassword, setPassword ] = useState("");
         // Example using fetch API
         const handleSubmit = async ( ) => {
-            // event: React.MouseEvent<HTMLButtonElement>
-            // event.preventDefault(); // Prevent default form submission
+
             const dataToSend ={
                 name:getName,
                 phone:getPhone,
@@ -32,7 +29,7 @@ export const  GetModalAdd : React.FC<ModalProps> = ({myModal, title,  getOpen,ge
                 username:getUsername,
                 password:getPassword}
             try {
-              const response = await fetch('api/configurations/users', {
+              const response = await fetch('api/configurations/users/action_add', {
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json',
@@ -46,6 +43,7 @@ export const  GetModalAdd : React.FC<ModalProps> = ({myModal, title,  getOpen,ge
                 // Handle success (e.g., show a success message, redirect)
                     myModal(false)
                     getToast(true)
+                    getRefresh()
               } else {
                 console.error('Failed to send data:', response.statusText);
                 // Handle error (e.g., show an error message)                
@@ -62,9 +60,7 @@ export const  GetModalAdd : React.FC<ModalProps> = ({myModal, title,  getOpen,ge
         
     <Modal show={isOpen} size={"7xl"}>
         {/* <ModalHeader>{titleModal}</ModalHeader> */}
-        <form>
             <ModalBody>
-
             <div id="accordion-open" data-accordion="open">
                 <h2 id="accordion-open-heading-1">
                     <div  className="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-b-0 border-gray-200 rounded-t-xl focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 gap-3" data-accordion-target="#accordion-open-body-1" aria-expanded="true" aria-controls="accordion-open-body-1">
@@ -89,13 +85,10 @@ export const  GetModalAdd : React.FC<ModalProps> = ({myModal, title,  getOpen,ge
 
             </ModalBody>
             <ModalFooter>
-                {/* <Button onClick={handleSubmit}>save</Button> */}
                 <BtnSave onClick={handleSubmit} />
-                <Button color="gray" onClick={()=>myModal(false)}>
-                    Decline
-                </Button>
+                <GeneralBtn onClick={()=>myModal(false)} name={"Cancel"} color={"red"} ></GeneralBtn>
             </ModalFooter>
-        </form>
+        
     </Modal>
     );
 }

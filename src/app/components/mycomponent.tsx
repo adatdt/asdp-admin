@@ -49,6 +49,21 @@ export const BtnSave : React.FC<BtnSaveProps> = ({onClick,position }) =>{
     )
 }
 
+interface GeneralBtnProps {
+    onClick?: () => void;
+    position?: string;
+    name:string;
+    color?:string;
+
+  }
+export const GeneralBtn : React.FC<GeneralBtnProps> = ({onClick,position, name , color="gray" }) =>{
+
+    return(
+        <button onClick={onClick} type="button" className={" focus:outline-none text-white bg-"+color+"-700 hover:bg-"+color+"-800 focus:ring-4 focus:ring-"+color+"-300 font-medium rounded-lg px-3 py-2 text-xs me-2 mb-2 dark:bg-"+color+"-600 dark:hover:bg-"+color+"-700 dark:focus:ring-"+color+"-800 "+position}>{name}</button>
+
+    )
+}
+
 
 interface TextInputProps {
     name: string;
@@ -67,14 +82,14 @@ export const TextInput : React.FC<TextInputProps> = ({name,id,typeText, placeHol
 }
 
 
-interface FlexFiltetingProps {
+interface FlexFilteringProps {
     name: string;
   }
 
-export const FlexFilteting : React.FC<FlexFiltetingProps> = ({name }) =>{
+export const FlexFiltering : React.FC<FlexFilteringProps> = ({name }) =>{
     return(
         <div className="flex">
-        <span id="dropdown-button" data-dropdown-toggle="dropdown" className="shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-s-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600">{name}</span>
+        <span id="dropdown-button" data-dropdown-toggle="dropdown" className="shrink-0 z-10 inline-flex items-center py-2.5 px-4  font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-s-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600 text-xs">{name}</span>
         <div className="relative w-full">
             <input type="search" id="search-dropdown" className="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-e-lg border-s-gray-50 border-s-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-s-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500" placeholder={name} required />
         </div>
@@ -87,7 +102,7 @@ interface MyDataListProps {
     defaultVal:boolean;
   }
 
-  export const FlexFiltetingDropdown  = (dataLists:MyDataListProps) =>{
+  export const FlexFilteringDropdown  = (dataLists:MyDataListProps) =>{
 
     const defaultData = dataLists.defaultVal
     const lists = dataLists.data
@@ -108,7 +123,7 @@ interface MyDataListProps {
         <div className="relative inline-block text-left w-[50%]">
             <div >
                 <button onClick={searchOption}  type="button" className="w-full shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-s-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600 "   id="menu-button" aria-expanded="true" aria-haspopup="true">
-                <div className="min-w-[80%]">
+                <div className="w-40 text-xs">
                 {valList}
                 </div>
                 <svg className="-mr-1 size-5 text-gray-400 right-10" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
